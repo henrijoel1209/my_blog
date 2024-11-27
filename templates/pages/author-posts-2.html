@@ -1,0 +1,47 @@
+{% extends 'bases/header.html' %}
+{% block content %}>
+
+	<!--Main container start -->
+	<main class="main-container">
+		<section class="main-highlight">
+			
+		</section>
+		<section class="main-content">
+			<div class="main-content-wrapper">
+				<div class="content-body">
+					<div class="author-wrapper">
+						<div class="author-image">
+							<img src="{{curriculum.photo.url}}" width="100" height="100">
+						</div>
+						<h2 class="author-name">{{curriculum.nom}}</h2>
+						<div class="author-meta">
+							<span>cv : </span><a href="{{curriculum.cv.url}}" target="blank">{{curriculum.cv}}</a></br>
+							<span>Mail : </span><a href="mailto:{{site_info.email}}">{{site_info.email}}</a></br>
+							<span>Telephone : </span><a href="tel:{{site_info.telephone}}">{{site_info.telephone}}</a>
+						</div>
+						<div style="text-align:center;margin-top: 5%;">
+							<p>{{curriculum.description|safe}}</p>
+						</div>
+					</div>
+					<div class="content-timeline">
+					</div>
+					</div>
+					<div class="content-sidebar">
+						<div class="sidebar_inner">
+									
+							<div class="sidebar-spacer"></div>
+							<div class="sidebar-button-group">
+								<a href="{% url 'about' %}" class="sidebar-buttons material-button "><i class="material-icons">&#xE851;</i><span class="btn-label">Acerca De</span></a>
+								<a href="{% url 'author' %}" class="sidebar-buttons material-button active"><i class="material-icons">&#xE866;</i><span class="btn-label">Autor</span></a>
+								<a href="{% url 'contact' %}" class="sidebar-buttons material-button "><i class="material-icons">&#xE894;</i><span class="btn-label">Contactor</span></a>
+							</div>
+			
+						</div>
+					</div>
+					
+				</div>
+		</section>
+
+	</main>
+	{% endblock %}
+	

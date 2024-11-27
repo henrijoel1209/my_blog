@@ -1,0 +1,104 @@
+{% extends 'bases/header.html' %}
+{% block content %}
+
+	<!--Main container start -->
+	<main class="main-container">
+
+		<section class="main-content extra-pages">
+			<div class="main-content-wrapper add-to-margin">
+				<div class="content-body">
+
+					<!-- article body start -->
+					<article class="article-wrapper">
+						<div class="article-content">
+							<h1 class="extra-title">Authors</h1>
+							<div class="article-inner">
+								<div class="author-list">
+
+									<!-- author item start -->
+									<div class="author-item">										
+										<div class="author-image">
+											<a href="#" class="author-item-link"><img src="img/news-test-images/news-img8.jpg" width="80" height="80"></a>
+										</div>
+										<div class="author-info">
+											<a href="#" class="author-name"><h4>John Doe</h4></a> - <em>CEO</em>
+											<div class="author-description">
+												Hi there, I'm writer based in New York City. I'm interested in all things tech, science, and photography related, and likes to yo-yo in my free time.
+											</div>
+											<div class="author-extras">
+												<span class="post-count">Post created : <b>17</b></span>&nbsp;&nbsp;&nbsp;
+												Website : <a href="#">www.envato.com</a>
+											</div>
+										</div>
+									</div>
+									<!-- author item start -->
+
+									<!-- author item start -->
+									<div class="author-item">										
+										<div class="author-image">
+											<a href="#" class="author-item-link"><img src="img/news-test-images/news-img2.jpg" width="80" height="80"></a>
+										</div>
+										<div class="author-info">
+											<a href="#" class="author-name"><h4>John Doe</h4></a> - <em>CEO</em>
+											<div class="author-description">
+												Hi there, I'm writer based in New York City. I'm interested in all things tech, science, and photography related, and likes to yo-yo in my free time.
+											</div>
+											<div class="author-extras">
+												<span class="post-count">Post created : <b>17</b></span>&nbsp;&nbsp;&nbsp;
+												Website : <a href="#">www.envato.com</a>
+											</div>
+										</div>
+									</div>
+									<!-- author item start -->
+
+									<!-- author item start -->
+									<div class="author-item">										
+										<div class="author-image">
+											<a href="#" class="author-item-link"><img src="img/news-test-images/news-img4.jpg" width="80" height="80"></a>
+										</div>
+										<div class="author-info">
+											<a href="#" class="author-name"><h4>John Doe</h4></a> - <em>CEO</em>
+											<div class="author-description">
+												Hi there, I'm writer based in New York City. I'm interested in all things tech, science, and photography related, and likes to yo-yo in my free time.
+											</div>
+											<div class="author-extras">
+												<span class="post-count">Post created : <b>17</b></span>&nbsp;&nbsp;&nbsp;
+												Website : <a href="#">www.envato.com</a>
+											</div>
+										</div>
+									</div>
+									<!-- author item start -->
+
+
+
+								</div>
+							</div>
+
+							<!--this is important for the left ad box or share box fixer -->
+							<div id="endOfTheArticle"></div>
+
+						</div>
+					</article>
+					<!-- article body end -->
+
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+
+						<div class="sidebar-spacer"></div>
+						<div class="sidebar-button-group">
+							<a href="{% url 'about' %}" class="sidebar-buttons material-button active"><i class="material-icons">&#xE851;</i><span class="btn-label">Acerca De</span></a>
+							<a href="{% url 'author' %}" class="sidebar-buttons material-button"><i class="material-icons">&#xE866;</i><span class="btn-label">Autor</span></a>
+							<a href="{% url 'contact' %}" class="sidebar-buttons material-button "><i class="material-icons">&#xE894;</i><span class="btn-label">Contactor</span></a>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+{% endblock %}

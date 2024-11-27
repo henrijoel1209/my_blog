@@ -1,0 +1,128 @@
+
+{% extends 'bases/header.html' %}
+{% block content %}
+
+	<!--Main container start -->
+	<main class="main-container">
+		<section class="main-highlight">
+			
+		</section>
+		<section class="main-content">
+			<div class="main-content-wrapper">
+				<div class="content-body">
+					<div class="content-timeline">
+						<!--Timeline header area start -->
+						<div class="post-list-header">
+							<span class="post-list-title">Mis Publicaciones</span>
+						</div>
+						<!--Timeline header area end -->
+
+
+						<div class="post-lists">
+							{% for p in pub %}
+							<div class="columns column-3">
+								<div class="post-list-item">
+									<div class="post-top">
+										<img class="post-image" src="{{p.image.url}}">
+										<h3 class="post-title">
+											<a href="{% url 'detail' p.slug %}"><span>{{p.titre}}</span></a>
+										</h3>
+									</div>
+									<div class="post-bottom">
+										<div class="post-author-box">
+											<span class="post-date">{{p.date_add|date:"d M Y"}}</span>
+										</div>
+										<div class="post-meta">
+											<a href="{% url 'detail' p.slug %}" class="read-more">Lee mas<i class="material-icons">&#xE315;</i></a>
+										</div>
+									</div>
+								</div>
+							</div>
+							{% endfor %}
+						</div>
+
+						<!--Data load more button start  -->
+						<div class="load-more">
+							<nav aria-label="...">
+								{% if pub.has_other_pages %}
+								<ul class="pagination pagination-sm">
+									{% for i in pub.paginator.page_range %}
+      									{% if pub.number == i %}
+								  <li class="page-item disabled" >
+									<a style="background:rgb(255, 210, 156)!important" class="page-link" href="#" tabindex="-1">{{ i }}</a>
+								  </li>
+								  		{% else %}
+								  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+								  		{% endif %}
+   									{% endfor %}
+								</ul>
+								{% endif %}
+							  </nav>
+							<!-- <button class="load-more-button material-button" type="button">
+								<i class="material-icons">&#xE5D5;</i>
+								<span>Carga más</span>
+							</button> -->
+						</div>
+						<!--Data load more button start  -->
+					</div>
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">Evento reciente</div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-boxed-post">
+								<ul>
+									{% for e in events_r %}
+									
+									<li>
+										<a href="{% url 'evenement' %}" style="background-image: url({{e.image.url}});">
+											<div class="box-wrapper" style="height: 100px;">
+												<div class="box-left">
+													<span>{{forloop.counter}}</span>
+												</div>
+												<div class="box-right">
+													<h3 class="p-title" >{{ e.titre }}
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													</h3>
+												</div>
+											</div>
+										</a>
+									</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">VIDA   </div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-carousel-post">
+								<div class="owl-carousel" id="widgetCarousel">
+									{% for g in gallerie %}
+								    <div class="item">
+								    	<a href="#">
+								    		<img src="{{g.gallerie.url}}" width="300">
+								    		<span class="w-post-title">{{g.titre}}</span>
+								    	</a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+{% endblock %}

@@ -1,0 +1,277 @@
+{% extends 'bases/header.html' %}
+
+{% block style%}
+
+<style>
+    /* FontAwesome for working BootSnippet :> */
+
+@import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
+#team {
+    background: #eee !important;
+}
+
+.btn-primary:hover,
+.btn-primary:focus {
+    background-color: #108d6f;
+    border-color: #108d6f;
+    box-shadow: none;
+    outline: none;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #007b5e;
+    border-color: #007b5e;
+}
+
+section {
+    padding: 60px 0;
+}
+
+section .section-title {
+    text-align: center;
+    color: #007b5e;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+}
+
+#team .card {
+    border: none;
+    background: #ffffff;
+}
+
+.image-flip:hover .backside,
+.image-flip.hover .backside {
+    -webkit-transform: rotateY(0deg);
+    -moz-transform: rotateY(0deg);
+    -o-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    transform: rotateY(0deg);
+    border-radius: .25rem;
+    height: 320px!important;
+    overflow: scroll!important;
+    color: rgb(119, 116, 116)!important;
+}
+
+.image-flip:hover .frontside,
+.image-flip.hover .frontside {
+    -webkit-transform: rotateY(180deg);
+    -moz-transform: rotateY(180deg);
+    -o-transform: rotateY(180deg);
+    transform: rotateY(180deg);
+    /* color: red!important; */
+}
+
+.mainflip {
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -moz-transition: 1s;
+    -moz-transform: perspective(1000px);
+    -moz-transform-style: preserve-3d;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+    position: relative;
+}
+
+.frontside {
+    position: relative;
+    -webkit-transform: rotateY(0deg);
+    -ms-transform: rotateY(0deg);
+    z-index: 2;
+    margin-bottom: 30px;
+}
+
+.backside {
+    position: absolute;
+    top: 0;
+    left: 0;
+    background: white;
+    -webkit-transform: rotateY(-180deg);
+    -moz-transform: rotateY(-180deg);
+    -o-transform: rotateY(-180deg);
+    -ms-transform: rotateY(-180deg);
+    transform: rotateY(-180deg);
+    -webkit-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    -moz-box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+    box-shadow: 5px 7px 9px -4px rgb(158, 158, 158);
+}
+
+.frontside,
+.backside {
+    -webkit-backface-visibility: hidden;
+    -moz-backface-visibility: hidden;
+    -ms-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-transition: 1s;
+    -webkit-transform-style: preserve-3d;
+    -moz-transition: 1s;
+    -moz-transform-style: preserve-3d;
+    -o-transition: 1s;
+    -o-transform-style: preserve-3d;
+    -ms-transition: 1s;
+    -ms-transform-style: preserve-3d;
+    transition: 1s;
+    transform-style: preserve-3d;
+}
+
+.frontside .card,
+.backside .card {
+    min-height: 312px;
+}
+
+.backside .card a {
+    font-size: 18px;
+    color: #007b5e !important;
+}
+
+.frontside .card .card-title,
+.backside .card .card-title {
+    color: #007b5e !important;
+}
+
+.frontside .card .card-body img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+}
+</style>
+{% endblock style%}
+{% block content %}
+<main class="main-container">
+    <section class="main-content">
+        <div class="main-content-wrapper">
+            <div class="content-body">
+                <div class="content-timeline">
+
+                    <div class="post-list-header" >
+                        <span class="post-list-title">Poesia</span>
+
+                    </div>
+
+                    <section id="team" class="pb-5">
+                        <div class="container">
+                            <div class="row">
+                                <!-- poème -->
+                                {% for p in poeme %}
+                                <div class="col-xs-12 col-sm-12 col-md-12">
+                                    <div class="image-flip" ontouchstart="this.classList.toggle('hover');">
+                                        <div class="mainflip">
+                                            <div class="frontside">
+                                                <div class="card">
+                                                    <div class="card-body text-center">
+                                                        
+                                                        <h4 class="card-title">{{p.titre}}</h4>
+                                                        <p class="card-text">{{p.description}}</p>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="backside">
+                                                <div class="card">
+                                                    <div class="card-body text-center mt-4">
+                                                        <h4 class="card-title">{{p.titre}}</h4>
+                                                        <p class="card-text">{{p.poeme|safe}}</p>
+                                                       
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </section>
+                    <div class="post-lists">
+                        {% for c in cours %}
+                        <div class="columns column-2">
+                            <div class="post-list-item">
+                                <div class="post-top">
+                                    <img class="post-image" src="{{c.image.url}}">
+                                    <h3 class="post-title"style="background-color: rgba(24, 22, 22, 0.638);">
+                                        <a href="#"><span >{{c.titre}}</span></a>
+                                    </h3>
+                                </div>
+                                <div class="post-bottom">
+                                    <div class="post-author-box">
+                                        <span class=" text-black">{{c.date_add|date:"M d, Y"}}</span>
+                                    </div>
+                                    <center>
+                                    <div class="post-meta">
+                                        <a href="{{c.cours.url}}" target="blank" class="btn btn-primary">Descargar </a>
+                                    </div>
+                                    </center>
+                                </div>
+                            </div>
+                        </div>	
+                        {% endfor %}						
+                    </div>
+
+                    <!--Data load more button start  -->
+                    <!-- <div class="load-more">
+                        <button class="load-more-button material-button" type="button">
+                            <i class="material-icons">&#xE5D5;</i>
+                            <span>Load More</span>
+                        </button>
+                    </div> -->
+                    <!--Data load more button start  -->
+                </div>
+
+            </div>
+            <div class="content-sidebar">
+                <div class="sidebar_inner">
+
+                    <div class="widget-item">
+                        <div class="w-header">
+                            <div class="w-title">Populer Posts</div>
+                            <div class="w-seperator"></div>
+                        </div>
+                        <ul class="w-post-list">
+                            {% for e in events_r%}
+                            <li>
+                                <a href="#">
+                                    <div class="w-post-image">
+                                        <img src="{{e.image.url}}" width="80" height="80">
+                                        <span>{{forloop.counter}}</span>
+                                    </div>
+                                    <div class="w-post-content">
+                                        <span class="w-post-title">{{e.titre}}</span>
+                                    </div>
+                                </a>
+                            </li>
+                            {% endfor %}
+                        </ul>
+                    </div>
+
+
+                    <div class="widget-item">
+                        <div class="w-header">
+                            <div class="w-title">Carousel Posts</div>
+                            <div class="w-seperator"></div>
+                        </div>
+                        <div class="w-carousel-post">
+                            <div class="owl-carousel" id="widgetCarousel">
+                                {% for g in gallerie %}
+                                <div class="item">
+                                    <a href="#">
+                                        <div class="w-play-img">
+                                            <img src="{{g.gallerie.url}}" width="300">
+
+                                        </div>
+                                        <span class="w-post-title">It has roots in a piece of classical Latin literature from</span>
+                                        
+                                    </a>
+                                </div>
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+{% endblock %}

@@ -1,0 +1,164 @@
+{% extends 'bases/header.html' %}
+{% block content %}
+
+	<!--Main container start -->
+	<main class="main-container">
+		<section class="main-highlight">
+			<div class="highlight-carousel slider-carousel">
+				
+				<div class="owl-carousel" id="postCarousel">
+					{% for p in publication_r %}
+				     <div class="item">
+
+				    	<article class="post-box" style="background-image: url({{p.image.url}});">
+				    		<div class="post-overlay">
+				    			<a href="#" class="post-category" title="Title of blog post" rel="tag">{{p.categorie}}</a>
+				    			<h3 class="post-title">{{p.titre}}</h3>
+				    			<div class="post-meta">
+				    				<div class="post-meta-author-info"> 
+				    					<span class="post-meta-date">
+				    						<abbr class="published updated" title="December 4, 2017">{{p.date_add|date:"d M Y"}}</abbr>
+				    					</span>
+				    				</div>
+				    			</div>
+				    		</div>
+				    		<a href="#" class="post-overlayLink"></a>
+				    	</article>
+
+					</div>
+					{% endfor %}
+				</div>
+
+			</div>
+		</section>
+		<section class="main-content">
+			<div class="main-content-wrapper">
+				<div class="content-body">
+					<div class="content-timeline">
+						<!--Timeline header area start -->
+						<div class="post-list-header">
+							<span class="post-list-title">
+								Últimas historias</span>
+						</div>
+						<!--Timeline header area end -->
+
+
+						<!--Timeline items start -->
+						<div class="timeline-items">
+								{% for p in pub %}
+							<div class="timeline-item">
+								<div class="timeline-left">
+									<div class="timeline-left-wrapper">
+										<a href="#" class="timeline-category" data-zebra-tooltip title="{{p.categorie}}"><i class="material-icons">&#xE894;</i></a>
+										<span class="timeline-date">{{p.date_add|date:"d M"}}</span>
+									</div>
+								</div>
+								<div class="timeline-right">
+									<div class="timeline-post-image">
+										<a href="#">
+											<img src="{{p.image.url}}" width="260">
+										</a>
+									</div>
+									<div class="timeline-post-content">
+										<a href="#" class="timeline-category-name">{{p.categorie}}</a>
+										<a href="{% url 'timeline' %}">
+											<h3 class="timeline-post-title">{{p.titre}}</h3>
+										</a>
+										<div class="timeline-post-info">
+											<span class="comment">32 comments</span>
+										</div>
+									</div>
+								</div>
+							</div>
+								{% endfor %}
+						</div>
+						<!--Timeline items end -->
+
+						<!--Data load more button start  -->
+						
+						<div class="load-more">
+							<nav aria-label="...">
+								{% if pub.has_other_pages %}
+								<ul class="pagination pagination-sm">
+									{% for i in pub.paginator.page_range %}
+      									{% if pub.number == i %}
+								  <li class="page-item disabled" >
+									<a style="background:rgb(255, 210, 156)!important" class="page-link" href="#" tabindex="-1">{{ i }}</a>
+								  </li>
+								  		{% else %}
+								  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+								  		{% endif %}
+   									{% endfor %}
+								</ul>
+								{% endif %}
+							  </nav>
+							<!-- <button class="load-more-button material-button" type="button">
+								<i class="material-icons">&#xE5D5;</i>
+								<span>Carga más</span>
+							</button> -->
+						</div>
+						<!--Data load more button start  -->
+					</div>
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">Evento reciente</div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-boxed-post">
+								<ul>
+									{% for e in events_r %}
+									
+									<li>
+										<a href="{% url 'evenement' %}" style="background-image: url({{e.image.url}});">
+											<div class="box-wrapper" style="height: 100px;">
+												<div class="box-left">
+													<span>{{forloop.counter}}</span>
+												</div>
+												<div class="box-right">
+													<h3 class="p-title" >{{ e.titre }}
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+														&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+													</h3>
+												</div>
+											</div>
+										</a>
+									</li>
+									{% endfor %}
+								</ul>
+							</div>
+						</div>
+
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">VIDA   </div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-carousel-post">
+								<div class="owl-carousel" id="widgetCarousel">
+									{% for g in gallerie %}
+								    <div class="item">
+								    	<a href="#">
+								    		<img src="{{g.gallerie.url}}" width="300">
+								    		<span class="w-post-title">{{g.titre}}</span>
+								    	</a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+{% endblock %} 

@@ -1,0 +1,9 @@
+Django==2.2.12
+django-filebrowser-no-grappelli==3.8.0
+django-tinymce4-lite==1.8.0
+jsmin>=3.0.0
+Pillow>=9.0.0
+pytz==2020.1
+six==1.15.0
+sqlparse==0.3.1
+locust==2.15.1

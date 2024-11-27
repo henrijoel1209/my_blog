@@ -1,0 +1,79 @@
+{% extends 'bases/header.html' %}
+{% block content %}
+
+	<!--Main container start -->
+	<main class="main-container">
+
+		<section class="sub-highlight">
+
+			<!-- Detail parallax start -->
+			<div class="parallax-box">
+				<div class="parallax-image" style="background-image: url({{events.image.url}});"></div>
+				<article class="post-box">
+		    		<div class="post-overlay">
+		    			<div class="post-overlay-inner">
+			    			<h1 class="post-title">{{events.titre}}</h1>
+			    			<div class="post-meta">
+			    				<div class="post-meta-author-info">
+			    					<span class="post-meta-date">
+			    						<abbr class="published updated" title="December 4, 2017">{{events.date_add|date:"d M Y"}}</abbr>
+			    					</span>
+			    				</div>
+			    			</div>
+		    			</div>
+		    		</div>
+		    	</article>
+			</div>
+
+			<!-- Detail parallax end -->
+
+		</section>
+		
+		<section class="main-content">	
+			<div class="article-inner">
+				<div class="article-header">
+					<div class="breadcrumb">
+						<ul>
+							<li><a href="{% url 'index' %}"><span>Bienvenida</span></a> <i class="material-icons">&#xE315;</i></li>
+							<li><span>{{events.titre}}</span></li>
+						</ul>
+					</div>
+				</div>
+				
+				<p>{{events.description|safe}}</p>
+			</div>
+			<!-- More article unit start -->
+			<div class="more-article">
+				<div class="w-header">
+					
+					<div class="w-seperator"></div>
+				</div>
+				<div class="more-posts">
+					{% for e in events_r%}
+					<div class="columns column-2">
+
+						<article class="post-box" style="background-image: url({{e.image.url}});">
+							<div class="post-overlay">
+								<h3 class="post-title">{{e.titre}}</h3>
+								<div class="post-meta">
+									<div class="post-meta-author-info">
+										<span class="post-meta-date">
+											<abbr class="published updated" title="December 4, 2017">{{e.date_add|date:"d M Y"}}</abbr>
+										</span>
+									</div>
+								</div>
+							</div>
+							<a href="{% url 'details' e.slug %}" class="post-overlayLink"></a>
+						</article>
+
+					</div>
+					{% endfor %}
+
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+
+    {% endblock %} 

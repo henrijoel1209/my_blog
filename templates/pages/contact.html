@@ -1,0 +1,179 @@
+{% extends 'bases/header.html' %}
+{% block content %}
+
+	<!--Main container start -->
+	<main class="main-container" style="text-align: center;">
+		<div class="container">
+			<div class="row">
+				<div class="col-md-1"></div>
+				<div class="col-md-9">
+								<!-- article body start -->
+								<article class="article-wrapper">
+									<div class="article-content">
+										<h1 class="extra-title" style="margin-bottom: 5%;margin-top: 4%;">Contact</h1>
+										<div class="article-inner">
+			 
+											<div class="contact-form">
+												<form id="contactFrom">
+													{% csrf_token %}
+													<div v-if="isSuccess" class="alert alert-success" role="alert">
+														${message}
+													</div>
+													<div v-if="error" class="alert alert-danger"  role="alert">
+														${message}
+													</div>
+													<div class="row">
+														<div class="col">
+															<input type="text" name="nname" placeholder="Name" class="form-control" v-model="name">
+														</div>
+														<br>
+														<div class="col">
+															<input type="text" name="eemail" placeholder="Email" class="form-control" v-model="email">
+														</div>
+														<br>
+														<div class="col">
+															<input type="tel" name="wwebsite" placeholder="telephone" class="form-control" v-model="tel">
+														</div>
+														<br>
+														<div class="clearfix"></div>
+													</div>
+													<br>
+													<div class="frm-row">
+														<input type="text" name="ssubject" placeholder="Subject" class="frm-input" v-model="subject">
+													</div>
+													<div class="frm-row">
+														<textarea class="frm-input" rows="8" name="mmessage" placeholder="Enter your message" v-model="messages"></textarea>
+													</div>
+													<div class="frm-row send-button">
+														<button v-if="!isregister" v-on:click.prevent="contactFrom" type="submit" class="frm-button material-button">Send message</button>
+														<button  v-if="isregister" disabled v-on:click.prevent="contactFrom" type="submit" class="frm-button material-button">Send message</button>
+													</div>
+												</form>
+											</div>
+										</div>
+			
+										<!--this is important for the left ad box or share box fixer -->
+										<div id="endOfTheArticle"></div>
+			
+									</div>
+								</article>
+								<!-- article body end -->
+			
+				</div>
+				<div class="col-md-2"></div>
+
+
+			</div>
+		</div>
+
+	</main>
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<script src=" https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>	
+
+	<script>
+		// Block Vue JS  
+		new Vue({
+		   
+		  // id de la section ou vue js aura effet
+		el: '#contactFrom',
+			// end 
+			
+			// varaible en rapport au v-model et variable permettant de traiter les erreurs
+		data: {
+			name:'',
+			email:'',
+			tel:'',
+			subject:'',
+			messages:'',
+			message:'',
+			isregister: false,
+			loader: false,
+			isSuccess: false,
+			error: false,
+			base_url: window.location.protocol + "//" + window.location.host + "/",
+		},
+			//end 
+		delimiters: ["${", "}"],
+			
+			// code à exécuter au chargement de la page (fonction,changement de variable...)
+		mounted() { },
+		
+			// les différentes fonctions 
+		methods: {
+			contactFrom: function () {
+			
+				// vérification des données 
+			   if (!this.isregister) {
+				   this.error = false
+				   this.isSuccess = false
+				   this.isregister = true
+				   if (this.name == "" || this.email == "" || this.tel == "" || this.messages == "") {
+					   this.message = "Veuillez remplir correctement les champs";
+					   this.error = true
+					   this.isSuccess = false
+					   this.isregister = false;
+				   } else {
+					//    permet d'imploder des fichiers
+					   
+					   // stocker les données 
+					   let formData = new FormData();
+					   formData.append('name', this.name);
+					   formData.append('email', this.email);
+					   formData.append('tel', this.tel);
+					   formData.append('subject', this.subject);
+					   formData.append('messages', this.messages);
+					   
+					   // post des données vers le back-end 
+					   axios.defaults.xsrfCookieName = 'csrftoken'
+					   axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+					   axios.post(this.base_url + 'about/is_contact',
+						   formData,
+						   {
+							   headers: {
+								   'Content-Type': 'multipart/form-data',
+							   }
+						   
+						   // traitement sur les reponses 
+						   }).then(response => {
+						   console.log(response)
+						   this.isregister = false;
+						   
+						   
+						   // si tout s'est bien passé 
+						   if (response.data.success) {
+							   
+							   // permet d'afficher un message à l'ecran 
+							   this.isSuccess = true
+							   this.error = false
+							   this.message = response.data.message
+							   this.success = response.data.success
+							   this.email = ""
+							   this.subject = ""
+							   this.messages = ""
+							   this.name	= ""
+							   this.tel = ""
+							   // redirection 
+							//    window.location.replace(this.base_url + 'about/contact');
+							   
+							   // en cas d'erreur 
+						   } else {
+							   this.error = true
+							   this.message = response.data.message
+							   this.success = response.data.success
+							   this.isSuccess = false
+						   }
+						   console.log("success variable" + this.isSuccess)
+						   // console.log("success variable"+this.error)
+					   })
+						   .catch((err) => {
+							   this.isregister = false;
+							   console.log(err);
+						   })
+				   }
+			   }
+		   },
+		}
+		 });
+
+		</script>
+	{% endblock %}

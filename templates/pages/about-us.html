@@ -1,0 +1,51 @@
+
+{% extends 'bases/header.html' %}
+{% block content %}
+	<!--Main container start -->
+	<main class="main-container">
+
+		<section class="main-content extra-pages">
+			<div class="main-content-wrapper add-to-margin">
+				<div class="content-body">
+
+					<!-- article body start -->
+					{% for a in about %}
+					<article class="article-wrapper">
+						<div class="article-content">
+							<h1 class="extra-title">{{a.titre}}</h1>
+							<div class="article-inner">
+								<figure>
+									<img src="{{a.image.url}}">
+								</figure>
+								<p>{{a.description|safe}}</p>
+
+
+								
+
+							<!--this is important for the left ad box or share box fixer -->
+							<div id="endOfTheArticle"></div>
+
+						</div>
+					</article>
+					{% endfor %}
+					<!-- article body end -->
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+						
+						<div class="sidebar-spacer"></div>
+						<div class="sidebar-button-group">
+							<a href="{% url 'about' %}" class="sidebar-buttons material-button active"><i class="material-icons">&#xE851;</i><span class="btn-label">Acerca De</span></a>
+							<a href="{% url 'author' %}" class="sidebar-buttons material-button"><i class="material-icons">&#xE866;</i><span class="btn-label">Autor</span></a>
+							<a href="{% url 'contact' %}" class="sidebar-buttons material-button "><i class="material-icons">&#xE894;</i><span class="btn-label">Contactor</span></a>
+						</div>
+
+
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</main>
+{% endblock %}

@@ -1,0 +1,185 @@
+
+{% extends 'bases/header_video.html' %}
+{% block content %}
+	<!--Main container start -->
+	<main class="main-container">
+
+		<section class="sub-highlight">
+
+			<!-- Video box start -->
+			<div class="video-box">
+				<div class="video-box-wrapper">
+					<div class="video-container">
+						<div class="video-player">
+							<div class="player-box">
+								<div class="player-content">
+									
+									<video id="plyrPlayer"  controls crossorigin>
+								  	</video>
+
+								</div>
+							</div>
+						</div>						
+						<div class="video-playlist">
+							<div class="playerlist">
+								<div class="playlist-header">
+									<a href="#" class="frm-button small">MyChannelLink</a>
+									<div class="md-checkbox">
+								    	<input id="i1" type="checkbox">
+								    	<label for="i1">Auto Play</label>
+								  	</div>
+								</div>
+								<div class="playlist-list customvideoplayer">
+									<ul>
+										{% for v in video %}
+										{% if forloop.first %}
+										<li class="active">
+											<a href="#" data-video='{{ v.get_video }}' data-provider="youtube">
+												<div class="video-list-image">
+													<img src={{v.image.url}} width="100" height="56">
+													<i class="material-icons">&#xE039;</i>
+												</div>
+												<div class="video-list-name">
+													{{v.titre}}
+												</div>
+											</a>
+										</li>
+										{% else %}
+										<li>
+											<a href="#" data-video='{{ v.get_video }}' data-provider="youtube" data-poster="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/images/BigBuckBunny.jpg" data-autoplay="true">
+												<div class="video-list-image">
+													<img src={{v.image.url}} width="100" height="56">
+													<i class="material-icons" >&#xE039;</i>
+												</div>
+												<div class="video-list-name">
+													{{v.titre}}
+												</div>
+											</a>
+										</li>
+										{% endif %}
+										{% endfor %}
+									</ul>
+								</div>
+							</div>
+						</div>
+						
+					
+					</div>
+				</div>
+			</div>
+			<!-- Video box end -->
+
+		</section>
+
+		<section class="main-content">	
+			<div class="article-inner">
+				
+				<p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+			</div>
+			
+		</section>
+
+	</main>
+	
+<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+<script src=" https://cdnjs.cloudflare.com/ajax/libs/axios/0.19.2/axios.min.js"></script>	
+
+<script>
+    // Block Vue JS  
+    new Vue({
+       
+      // id de la section ou vue js aura effet
+    el: '#newsletter',
+        // end 
+        
+        // varaible en rapport au v-model et variable permettant de traiter les erreurs
+    data: {
+        email:'',
+        message:'',
+        isregister: false,
+        loader: false,
+        isSuccess: false,
+        error: false,
+        base_url: window.location.protocol + "//" + window.location.host + "/",
+    },
+        //end 
+    delimiters: ["${", "}"],
+        
+        // code à exécuter au chargement de la page (fonction,changement de variable...)
+    mounted() { },
+    
+        // les différentes fonctions 
+    methods: {
+        newsletter: function () {
+        
+            // vérification des données 
+           if (!this.isregister) {
+               this.error = false
+               this.isSuccess = false
+               this.isregister = true
+               if (this.email == "") {
+                   this.message = "Veuillez remplir correctement le champs";
+                   this.error = true
+                   this.isSuccess = false
+                   this.isregister = false;
+               } else {
+                //    permet d'imploder des fichiers
+                   
+                   // stocker les données 
+                   let formData = new FormData();
+                   formData.append('email', this.email);
+                   
+                   // post des données vers le back-end 
+                   axios.defaults.xsrfCookieName = 'csrftoken'
+                   axios.defaults.xsrfHeaderName = 'X-CSRFToken'
+                   axios.post(this.base_url + 'is_newsletter',
+                       formData,
+                       {
+                           headers: {
+                               'Content-Type': 'multipart/form-data',
+                           }
+                       
+                       // traitement sur les reponses 
+                       }).then(response => {
+                       console.log(response)
+                       this.isregister = false;
+                       
+                       
+                       // si tout s'est bien passé 
+                       if (response.data.success) {
+                           
+                           // permet d'afficher un message à l'ecran 
+                           this.isSuccess = true
+                           this.error = false
+                           this.message = response.data.message
+                           this.success = response.data.success
+                           this.email = ""
+                           this.subject = ""
+                           this.messages = ""
+                           this.name	= ""
+                           this.tel = ""
+                           // redirection 
+                        //    window.location.replace(this.base_url + 'about/contact');
+                           
+                           // en cas d'erreur 
+                       } else {
+                           this.error = true
+                           this.message = response.data.message
+                           this.success = response.data.success
+                           this.isSuccess = false
+                       }
+                       console.log("success variable" + this.isSuccess)
+                       // console.log("success variable"+this.error)
+                   })
+                       .catch((err) => {
+                           this.isregister = false;
+                           console.log(err);
+                       })
+               }
+           }
+       },
+    }
+     });
+
+    </script>
+{% endblock %}

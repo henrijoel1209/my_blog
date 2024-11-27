@@ -1,0 +1,347 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- Mirrored from tevratgundogdu.com/works/ideabox-html-template/video-custom-player.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Jun 2020 16:56:56 GMT -->
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>El Elenizado - Blog</title>
+
+	<link href="https://fonts.googleapis.com/css?family=Poppins:300,400,600,700,900&amp;subset=latin-ext" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+
+	<!-- Tooltip plugin (zebra) css file -->
+	<link rel="stylesheet" type="text/css" href="/static/plugins/zebra-tooltip/zebra_tooltips.min.css">
+
+	<!-- Owl Carousel plugin css file. only used pages -->
+	<link rel="stylesheet" type="text/css" href="/static/plugins/owl-carousel/assets/owl.carousel.min.css">
+
+	<!-- Plyr video player plugin css file. only custom player pages-->
+	<link rel="stylesheet" href="/static/plugins/plyr-video-player/plyr.css">
+
+	<!-- Ideabox main theme css file. you have to add all pages -->
+	<link rel="stylesheet" type="text/css" href="/static/css/main-style.css">
+
+	<!-- Ideabox responsive css file -->
+	<link rel="stylesheet" type="text/css" href="/static/css/responsive-style.css">
+	<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css" rel="stylesheet" >
+</head>
+
+<body>
+	
+	<!-- header start -->
+	<header class="header">
+		<div class="header-wrapper">
+
+			<!--sidebar menu toggler start -->
+			<div class="toggle-sidebar material-button">
+				<i class="material-icons">&#xE5D2;</i>
+			</div>
+			<!--sidebar menu toggler end -->
+
+			<!--logo start -->
+			<div class="logo-box">
+				<h1>
+					<a href="index.html" class="logo"></a>
+				</h1>
+			</div>
+			<!--logo end -->
+ 
+			<div class="header-menu">
+
+				<!-- header left menu start -->
+				<ul class="header-navigation" data-show-menu-on-mobile>
+					<li>
+						<a href="{% url 'index' %}" class="material-button submenu-toggle">BIENVENIDA</a>
+					</li>
+					<li>
+						<a href="#" class="material-button submenu-toggle">PUBLICACIONES</a>
+						<div class="header-submenu">
+							<ul>
+								<li><a href="{% url 'timeline' %}">PUBLICACIONES</a></li>
+								<li><a href="{% url 'evenement' %}">EVENTO</a></li>							
+							</ul>
+						</div>
+					</li>
+					<li>
+						<a href="#" class="material-button submenu-toggle">REFERENCIA</a>
+						<div class="header-submenu">
+							<ul>
+								<!-- <li><a href="{% url 'poeme' %}">POESÍA</a></li>							 -->
+								<li><a href="{% url 'textes' %}">TEXTOS DE REFERENCIA</a></li>
+								<li><a href="{% url 'video' %}">VÍDEO DE REFERENCIA</a></li>							
+							</ul>
+						</div>
+					</li>
+					<!-- <li>
+						<a href="{% url 'about' %}" class="material-button submenu-toggle">ACERCA DE</a>
+					</li> -->
+					<li>
+						<a href="{% url 'cours' %}" class="material-button submenu-toggle">CURSOS</a>
+					</li>
+					<li>
+						<a href="{% url 'about' %}" class="material-button submenu-toggle">ACERCA DE</a>
+					</li> 
+					<li>
+						<a href="{% url 'contact' %}" class="material-button submenu-toggle">CONTACTAR</a>
+					</li>
+				</ul>
+				<!-- header left menu end -->
+
+			</div>
+			<div class="header-right with-seperator">
+
+				<!-- header right menu start -->
+				<ul class="header-navigation">
+					<li>
+						<a href="#" class="material-button search-toggle"><i class="material-icons">&#xE8B6;</i></a>
+					</li>
+					<li class="hide-on-mobile"><a href="#" class="material-button" data-modal="newsletterModal"><i class="material-icons">&#xE0E1;</i></a></li>
+				</ul>
+				<!-- header right menu end -->
+
+			</div>
+
+			<!--header search panel start -->
+			<div class="search-bar">
+				<form class="search-form">
+					<div class="search-input-wrapper">
+						<input type="text" name="qq" placeholder="search something..." class="search-input">
+						<button type="submit" name="search" class="search-submit"><i class="material-icons">&#xE5C8;</i></button>
+					</div>
+					<span class="search-close search-toggle">
+						<i class="material-icons">&#xE5CD;</i>
+					</span>
+				</form>
+			</div>
+			<!--header search panel end -->
+
+		</div>
+	</header>
+	<!-- header end -->
+
+
+	<!-- Left sidebar menu start -->
+	<div class="sidebar">
+		<div class="sidebar-wrapper">
+
+			<!-- side menu logo start -->
+			<div class="">
+				<a href="#"></a>
+				<div class="sidebar-toggle-button">
+					<i class="material-icons">&#xE317;</i>
+				</div>
+			</div>
+			<div id="mobileMenu">
+				<div class="sidebar-seperate"></div>
+			</div>
+
+			<div class="sidebar-seperate"></div>
+
+		</div>
+	</div>
+    <!-- Left sidebar menu end -->
+    
+{% block content %}
+{% endblock%}
+
+    	<!-- Register popup html source start -->
+	<div class="m-modal-box" id="registerModal">
+		<div class="m-modal-overlay"></div>
+		<div class="m-modal-content small">
+			<div class="m-modal-header">
+				<h3 class="m-modal-title">Register</h3>
+				<span class="m-modal-close"><i class="material-icons">&#xE5CD;</i></span>
+			</div>
+			<div class="m-modal-body">
+				<div class="m-modal-social-logins">
+					<div class="columns column-2">
+						<button class="frm-button facebook material-button full" type="button">Facebook</button>
+					</div>
+					<div class="columns column-2">
+						<button class="frm-button twitter material-button full" type="button">Twitter</button>
+					</div>
+					<div class="columns column-2">
+						<button class="frm-button google material-button full" type="button">Google</button>
+					</div>
+				</div>
+
+				<div class="m-modal-seperator"><span>OR</span></div>
+
+				<form>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="name" placeholder="Name">
+					</div>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="username" placeholder="Username">
+					</div>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="email" placeholder="Email">
+					</div>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="password" placeholder="Password">
+					</div>
+					<div class="frm-row">
+						<label class="frm-check-radio-label"><input type="checkbox" name="test"> <span>I accept your <a href="#">register policy</a>.</span></label>
+					</div>
+					<div class="frm-row">
+						<button class="frm-button material-button full" type="button">Register</button>
+					</div>
+				</form>
+				<div class="frm-row">
+					<p class="txt-center">Do you already have an account? <a href="#" data-modal="loginModal">Login</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Register popup html source end ---->
+
+	<!-- Login popup html source start -->
+	<div class="m-modal-box" id="loginModal">
+		<div class="m-modal-overlay"></div>
+		<div class="m-modal-content small">
+			<div class="m-modal-header">
+				<h3 class="m-modal-title">Login</h3>
+				<span class="m-modal-close"><i class="material-icons">&#xE5CD;</i></span>
+			</div>
+			<div class="m-modal-body">
+				<div class="m-modal-social-logins">
+					<div class="columns column-3">
+						<button class="frm-button facebook material-button full" type="button">Facebook</button>
+					</div>
+					<div class="columns column-3">
+						<button class="frm-button google material-button full" type="button">Google</button>
+					</div>
+				</div>
+
+				<div class="m-modal-seperator"><span>OR</span></div>
+
+				<form>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="email" placeholder="Email">
+					</div>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="password" placeholder="Password">
+					</div>
+					<div class="frm-row">
+						<button class="frm-button material-button full" type="button">Login</button>
+					</div>
+				</form>
+				<div class="frm-row">
+					<p class="txt-center">Don't you have an account yet? <a href="#" data-modal="registerModal">Register</a></p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Login popup html source end -->
+
+	<!-- Newsletter popup html source start -->
+	<div class="m-modal-box" id="newsletterModal">
+		<div class="m-modal-overlay"></div>
+		<div class="m-modal-content small">
+			<div class="m-modal-header">
+				<h3 class="m-modal-title">Newsletter</h3>
+				<span class="m-modal-close"><i class="material-icons">&#xE5CD;</i></span>
+			</div>
+			<div class="m-modal-body">
+				<p>Envíe a nuestro boletín para recibir historias exclusivas entregadas en su bandeja de entrada!</p>
+				<form id="newsletter">
+					{% csrf_token %}
+					<div v-if="isSuccess" class="alert alert-success" role="alert">
+							${message}
+					</div>
+					<div v-if="error" class="alert alert-danger"  role="alert">
+							${message}
+					</div>
+					<div class="frm-row">
+						<input class="frm-input" type="text" name="email" placeholder="Email address" v-model="email">
+					</div>
+					<div class="frm-row">
+						<button v-if="!isregister" v-on:click.prevent="newsletter" type="submit" class="frm-button material-button full" type="button">Send</button>
+						<button v-if="isregister" disabled v-on:click.prevent="newsletter" type="submit" class="frm-button material-button full" type="button">Send</button>
+					</div>
+				</form>
+			</div>
+		</div>
+	</div>
+	<!-- Newsletter popup html source end -->
+
+	<div class="overlay"></div>
+
+	<script src="/static/js/jquery-3.2.1.min.js"></script>
+
+	<!-- Tooltip plugin (zebra) js file -->
+	<script src="/static/plugins/zebra-tooltip/zebra_tooltips.min.js"></script>
+
+	<!-- Owl Carousel plugin js file -->
+	<script src="/static/plugins/owl-carousel/owl.carousel.min.js"></script>
+
+	<!-- Plyr video player plugin js file -->
+	<!--<script src="https://cdn.plyr.io/3.1.0/plyr.js"></script>-->
+	<script src="/static/plugins/plyr-video-player/plyr.js"></script>
+
+	<!-- Ideabox theme js file. you have to add all pages. -->
+	<script src="/static/js/main-script.js"></script>
+
+	<script type="text/javascript">
+
+		//plyr video plugin initialize
+		const player = new Plyr('#plyrPlayer');
+
+		$('.customvideoplayer ul li a').on('click', function(e){
+			e.preventDefault();
+	    	$(this).parent().parent().find('li').removeClass('active');
+	    	$(this).parent().addClass('active');
+
+	    	var video = $(this).attr('data-video');
+	    	var provider = $(this).attr('data-provider');
+	    	var poster = $(this).attr('data-poster');
+	    	var autoplay = $(this).attr('data-autoplay');
+
+	    	if (video != undefined && video != '' && video != null)
+	    	{
+	    		if(provider == 'custom')
+	    		{
+	    			player.source = {
+					    type: 'video',
+					    sources: [{
+					        src: video,
+					        type: 'video/mp4'
+					    }],
+					    poster: poster
+					};
+	    		}
+	    		else if (provider == 'youtube' || provider == 'vimeo')
+	    		{
+	    			player.source = {
+					    type: 'video',
+					    sources: [{
+					        src: video,
+					        provider: provider
+					    }]
+					};
+	    		}
+
+	    		if (autoplay == 'true' || autoplay == true)
+	    			player.play(); 
+	    	}
+		});
+
+		$('.customvideoplayer ul li.active a').trigger('click');
+		
+
+		//widget carousel initialize
+		$('#widgetCarousel').owlCarousel({
+		    dots:true,
+		    nav:false,
+		    items:1
+		})
+
+	</script>
+{% include 'includes/newsletter_script.html' %}
+</body>
+
+
+<!-- Mirrored from tevratgundogdu.com/works/ideabox-html-template/video-custom-player.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 02 Jun 2020 16:56:58 GMT -->
+</html>

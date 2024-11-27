@@ -1,0 +1,121 @@
+ {% extends 'bases/header.html' %}
+ {% load static %}
+{% block content %}
+	<!--Main container start -->
+	<main class="main-container">
+		<section class="main-highlight">
+		</section>
+		<section class="main-content">
+			<div class="main-content-wrapper">
+				<div class="content-body">
+					<div class="content-timeline">
+
+						<div class="post-list-header" >
+							<span class="post-list-title">Cursos</span>
+
+						</div>
+
+
+						<div class="post-lists">
+							{% for c in cour %}
+							<div class="columns column-2">
+								<div class="post-list-item">
+									<div class="post-top">
+										<img class="post-image" src="{{c.image.url}}">
+										<h3 class="post-title"style="background-color: rgba(24, 22, 22, 0.638);">
+											<a href="#"><span >{{c.titre}}</span></a>
+										</h3>
+									</div>
+									<div class="post-bottom">
+										<div class="post-author-box">
+											<span class=" text-black">{{c.date_add|date:"M d, Y"}}</span>
+										</div>
+										<center>
+										<div class="post-meta">
+											<a href="{{c.cours.url}}" target="blank" class="btn btn-primary">Descargar </a>
+										</div>
+										</center>
+									</div>
+								</div>
+							</div>	
+							{% endfor %}						
+						</div>
+
+						<!--Data load more button start  -->
+						<div class="load-more">
+							<nav aria-label="...">
+								{% if cour.has_other_pages %}
+								<ul class="pagination pagination-sm">
+									{% for i in cour.paginator.page_range %}
+      									{% if cour.number == i %}
+								  <li class="page-item disabled" >
+									<a style="background:rgb(255, 210, 156)!important" class="page-link" href="#" tabindex="-1">{{ i }}</a>
+								  </li>
+								  		{% else %}
+								  <li class="page-item"><a class="page-link" href="?page={{ i }}">{{ i }}</a></li>
+								  		{% endif %}
+   									{% endfor %}
+								</ul>
+								{% endif %}
+							  </nav>
+						</div>
+						<!--Data load more button start  -->
+					</div>
+
+				</div>
+				<div class="content-sidebar">
+					<div class="sidebar_inner">
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">Evento reciente</div>
+								<div class="w-seperator"></div>
+							</div>
+							<ul class="w-post-list">
+								{% for e in events_r%}
+								<li>
+									<a href="#">
+										<div class="w-post-image">
+											<img src="{{e.image.url}}" width="80" height="80">
+											<span>{{forloop.counter}}</span>
+										</div>
+										<div class="w-post-content">
+											<span class="w-post-title">{{e.titre}}</span>
+										</div>
+									</a>
+								</li>
+								{% endfor %}
+							</ul>
+						</div>
+
+
+						<div class="widget-item">
+							<div class="w-header">
+								<div class="w-title">VIDA</div>
+								<div class="w-seperator"></div>
+							</div>
+							<div class="w-carousel-post">
+								<div class="owl-carousel" id="widgetCarousel">
+									{% for g in gallerie %}
+								    <div class="item">
+								    	<a href="#">
+								    		<div class="w-play-img">
+								    			<img src="{{g.gallerie.url}}" width="300">
+								    			
+								    		</div>
+								    		<span class="w-post-title">{{g.titre}}</span>
+								    		
+								    	</a>
+									</div>
+									{% endfor %}
+								</div>
+							</div>
+						</div>
+
+				</div>
+			</div>
+		</section>
+
+	</main>
+
+	{% endblock %} 
